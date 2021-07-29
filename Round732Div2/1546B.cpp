@@ -11,9 +11,29 @@ using namespace std;
 #define pb push_back
 const int mod = 1e9 + 7;
 const int N = 100005, M=22;
+
+
+
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        
+        cin>>n;
+        vector<pair<int,pair<int,int>>> v(n);
+        for(i=0;i<n;i++)
+        {
+            cin>>v[i].S.F;
+            cin>>v[i].F;
+            cin>>v[i].S.S;
+
+        }
+        sort(v.begin(),v.end());
+
+        for(auto x: v)
+        {
+            if(c<3)
+            {
+                if(v[i].)
+            }
+        }
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -26,9 +46,9 @@ void init() {
 int32_t main(){
     init();
         {
-            int t;
-            cin>>t;
-            while(t--)
+            // int t;
+            // cin>>t;
+            // while(t--)
             solve();
         }
     }
