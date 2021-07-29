@@ -11,27 +11,41 @@ using namespace std;
 #define pb push_back
 const int mod = 1e9 + 7;
 const int N = 100005, M=22;
+
+bool cmp(pair<int,int> a, pair<int,int> b)
+{
+    if(a.first == b.first)
+        return a.second > b.second;
+    return a.first<b.second;
+}
+
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
         cin>>n>>k;
-        vector<pair<int,int>>arr(n+1);
-        arr[0].first=INT_MAX;
-        for(int i=1;i<=n;i++)
+        vector<int>arr(n);
+        //arr[0].first=INT_MAX;
+        for(int i=0;i<n;i++)
             {  
-                cin>>arr[i].first;
-                arr[i].second = i;
+                cin>>arr[i];
+                //arr[i].second = i+1;
             }
 
-            sort(arr.begin(),arr.end());
+            //sort(arr.begin(),arr.end());
             // cout<<arr[0].first<<" arr "<<arr[0].second<<endl;
             // cout<<arr[1].first<<" arr "<<arr[1].second<<endl;
 
-            int maxA = INT_MIN;
-            for(int i=1;i<n;i++)
-            {
-                maxA = max(maxA, arr[i-1].second*arr[i].second - k*(arr[i-1].first|arr[i].first));
-            }
-            cout<<maxA<<endl;
+            ans = INT_MIN;
+
+            for(i=n-1;i>=0;i--)
+                for(j=n-1;j>i;j--)
+                    if((i+1)*(j+1) < ans)break;
+                    else
+                    {
+                        ans = max(ans,(i+1)*(j+1)-k*(arr[i]|arr[j]));
+                    }
+            
+
+            cout<<ans<<endl;
             
             //cout<<arr[0].second*arr[1].second-k*(arr[0].first | arr[1].first)<<endl;
 }
