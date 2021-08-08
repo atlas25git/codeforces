@@ -16,8 +16,8 @@ void solve(){
     
 
     //taking input from unknown size
-    vector<int> num(istream_iterator<int>(cin),{});
-    for(auto x: num)cout<<x<<" ";
+    //vector<int> num(istream_iterator<int>(cin),{});
+    //for(auto x: num)cout<<x<<" ";
     //stdin::
     //1 2 3 4 15
     //stdout::
@@ -28,13 +28,14 @@ void solve(){
     //taking input from some char seperated string
     string s;
     getline(cin,s);
-    //cout<<s;
-    vector<int> v;
+    cout<<s<<"\n";
+    vector<char> v;
     stringstream so(s);
-    for(int i;so>>i;){
+    //this works till there is any exception of data type
+    for(char i;so>>i;){
         v.push_back(i);
-        if(so.peek() == ',')
-            so.ignore();
+        //if(so.peek() == ',')
+            //so.ignore();
     }
     for(auto x: v)cout<<x<<" ";
     //stdin::

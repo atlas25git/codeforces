@@ -12,22 +12,22 @@ using namespace std;
 const int mod = 1e9 + 7;
 const int N = 100005, M=22;
 void solve(){
-    int i,j,k,n,m,a=0,cnt=0,sum=0;
-        //vector<int>ans(istream_iterator<int>(cin),{});
-        vector<int> ans;
-        
+    int i,j,k,n,m,ans=0,cnt=0,sum=0;
+        string s,t;
+        cin>>s>>t;
+        n = s.size();
+        m = t.size();
+        string built;
 
-        string s;
-        getline(cin,s);
-        stringstream so(s);
-        if(so.peek()==',')so.ignore();
-        for(int i;so>>i;)
-        {
-            ans.push_back(i);
-            if(so.peek()==',')so.ignore();
-
+        for(i=0;s[i];i++){
+            for(j=0;j<i;j++)
+                built+=s[j];
+            built += s[i];
+            for(j=i-1;j>=0;j--)
+                built += s[j];
+            built += '#';
         }
-         for(auto x: ans)cout<<x<<" ";
+        cout<<(built.find(t)!=string::npos?"YES":"NO")<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -40,7 +40,9 @@ void init() {
 int32_t main(){
     init();
         {
-            
+            int t;
+            cin>>t;
+            while(t--)
             solve();
         }
     }
