@@ -36,27 +36,25 @@ int nCr(int n, int r) {
         return 0;
     return mul(mul(fact[n], invfact[r]), invfact[n - r]);
 }
+
+int sol(vector<pair<int,int>>& ar,int n,int Wt)
+{
+    int dp[n+1][Wt+1];
+    for(int w=0;w<=Wt;w++)
+    {
+        dp[1][w] = 
+    }
+}
+
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cin>>n>>k;
-        vector<int> h(istream_iterator<int>(cin),{});
-        //for(auto x:h)cout<<x<<endl;
-
-        vector<int> dp(n+1,0);
-
-        dp[0] = 0;
-        dp[1] = abs(h[0] - h[1]);
-        //dp[2] = min(abs(h[1] - h[2])+dp[]);
-
-        for(int i=2;i<=n;i++)
-        {   
-            dp[i] = INT_MAX;
-            for(j=i-1;j>-1 && (i-j)<=k;j--)
-                dp[i] = min(dp[i],(dp[j] + abs(h[i] - h[j])));
-        }
-        cout<<dp[n-1]<<endl;
-        // for(auto x:dp)cout<<x<<endl;
-
+    int wt;
+    cin>>n>>wt;
+    vector<pair<int,int>>ar(n+1);
+    for(i=1;i<=n;i++)
+        cin>>ar[i].F>>ar[i].S;
+    
+    cout<<sol(ar,n,wt)<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -69,9 +67,9 @@ void init() {
 int32_t main(){
     init();
         {
-            // int t;
-            // cin>>t;
-            // while(t--)
+            int t;
+            cin>>t;
+            while(t--)
             solve();
         }
     }

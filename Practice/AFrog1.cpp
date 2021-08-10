@@ -38,7 +38,7 @@ int nCr(int n, int r) {
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cin>>n>>k;
+        cin>>n;
         vector<int> h(istream_iterator<int>(cin),{});
         //for(auto x:h)cout<<x<<endl;
 
@@ -49,13 +49,13 @@ void solve(){
         //dp[2] = min(abs(h[1] - h[2])+dp[]);
 
         for(int i=2;i<=n;i++)
-        {   
-            dp[i] = INT_MAX;
-            for(j=i-1;j>-1 && (i-j)<=k;j--)
-                dp[i] = min(dp[i],(dp[j] + abs(h[i] - h[j])));
+        {
+            int x = abs(h[i]-h[i-1])+dp[i-1];
+            int y = abs(h[i]-h[i-2])+dp[i-2];
+            dp[i] = min(x,y);
         }
         cout<<dp[n-1]<<endl;
-        // for(auto x:dp)cout<<x<<endl;
+        //for(auto x:dp)cout<<x<<endl;
 
 }
 void init() {
