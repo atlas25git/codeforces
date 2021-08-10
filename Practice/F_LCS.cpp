@@ -36,46 +36,57 @@ int nCr(int n, int r) {
         return 0;
     return mul(mul(fact[n], invfact[r]), invfact[n - r]);
 }
-struct item{
-    int val,wt;
-};
 
-int sol(vector<item>& a,int totalItem,int totalWt)
-{
-    vector<vector<int>>dp(totalItem+1,vector<int>(totalWt+1,0));
+vector<vector<int>>dp;
 
-    //base case
-    //for item 1
-    dp[1][a[1].wt] = a[1].val;
+string getLCS(string s,string t,int len){
+            //cout<<s<<" "<<t<<" ";
+   
+    //cout<<len<<endl;
+    string LCS;
+    int i=1,j=1;
+    while(len>0){
 
-    for(int i=2;i<=totalItem;i++)
-    {
-        for(int wt=0;wt<=totalWt;wt++)
-         {  
-             dp[i][wt] = dp[i-1][wt];
-            if(wt>=a[i].wt)
-            {
-                dp[i][wt] = max(
-                    dp[i][wt],
-                    a[i].val + dp[i-1][wt - a[i].wt]
-                );
+        if(s[i-1]==t[j-1])
+        {
+            LCS.push_back(s[i-1]);
+            i++,j++,len--;
+        }
+        else
+        {
+            if(dp[i][j+1]>dp[i+1][j])j++;
+            else i++;
 
-            }
-         }    
+        }
+        
     }
-    return *max_element(dp[totalItem].begin(),dp[totalItem].end());
+    cout<<LCS<<endl;
+    return LCS;
 }
-
 
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-    int totalWt;
-    cin>>n>>totalWt;
+    string s1,s2;
+    cin>>s1>>s2;
 
-    vector<item>a(n+1);
-    for(i=1;i<=n;i++)cin>>a[i].wt>>a[i].val;
+    n = s1.length();
+    m = s2.length();
 
-    cout<<sol(a,n,totalWt)<<endl;      
+    dp.resize(n+1,vector<int>(m+1,0));
+
+    for(i = 0;i<=n;i++)
+        for(j=0;j<=m;j++)
+        {
+            if(!i || !j)
+                dp[i][j]=0;
+            else if(s1[i-1] == s2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else  dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+        }
+    cout<<dp[n][m]<<endl;
+    getLCS("axyb","abyxb",dp[n][m]);
+
+        
 }
 void init() {
     ios_base:: sync_with_stdio(false);

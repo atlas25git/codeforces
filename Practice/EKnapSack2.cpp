@@ -36,46 +36,53 @@ int nCr(int n, int r) {
         return 0;
     return mul(mul(fact[n], invfact[r]), invfact[n - r]);
 }
+
 struct item{
     int val,wt;
 };
 
-int sol(vector<item>& a,int totalItem,int totalWt)
+int sol(vector<item>& a,int n,int wt)
 {
-    vector<vector<int>>dp(totalItem+1,vector<int>(totalWt+1,0));
+    //since here the constraints on wt are very large thus we'll 
+    //make a dp fill up table for number of items and maxPossible value
+    //that could be formed using them, and the cell will contain wt req
+    //now traverse the last row for the wt satisfying the given criteria
 
-    //base case
-    //for item 1
-    dp[1][a[1].wt] = a[1].val;
+    //max value calculation:
+    int maxVal = n*1000; //as val can at max be 1000 individually
+    vector<vector<int>>dp(n+1,vector<int>(maxVal+1,INT_MAX));
+    for(int i=0;i<=maxVal;i++)dp[1][i]=INT_MAX;
+    dp[1][0] = 0;
+    dp[1][a[1].val] = a[1].wt;
 
-    for(int i=2;i<=totalItem;i++)
-    {
-        for(int wt=0;wt<=totalWt;wt++)
-         {  
-             dp[i][wt] = dp[i-1][wt];
-            if(wt>=a[i].wt)
+    for(int i=2;i<=n;i++)
+        for(int j=0;j<=maxVal;j++)
+        {   
+            dp[i][j] = dp[i-1][j];
+            if(maxVal>=a[i].val)
             {
-                dp[i][wt] = max(
-                    dp[i][wt],
-                    a[i].val + dp[i-1][wt - a[i].wt]
+                dp[i][j] = min(
+                    dp[i][j],
+                    dp[i-1][j-a[i].val] + a[i].wt
                 );
-
             }
-         }    
-    }
-    return *max_element(dp[totalItem].begin(),dp[totalItem].end());
-}
 
+        }
+
+    int ans=0;
+    //lookup for the appr wt under constraint with n items
+    for(int i=0;i<=maxVal;i++)
+        if(dp[n][i]<=wt)ans = i;
+    return ans;
+}
 
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-    int totalWt;
-    cin>>n>>totalWt;
-
-    vector<item>a(n+1);
-    for(i=1;i<=n;i++)cin>>a[i].wt>>a[i].val;
-
-    cout<<sol(a,n,totalWt)<<endl;      
+        int wt;
+        cin>>n>>wt;
+        vector<item>a(n+1);
+        for(i=1;i<=n;i++)cin>>a[i].wt>>a[i].val;
+        cout<<sol(a,n,wt)<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
