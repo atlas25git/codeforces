@@ -36,9 +36,31 @@ int nCr(int n, int r) {
         return 0;
     return mul(mul(fact[n], invfact[r]), invfact[n - r]);
 }
+
+
+int mem[N][2], vis[N][2];
+int cntEven, _2pwn, n;
+
+int dp(int i, bool equal)
+{
+    if(i<0)return 1;
+    int& rt = mem[i][equal];
+    if(!equal)return rt = mul(_2pwn,dp(i-1,0));
+    if(n&1)
+        return rt = mul(dp(i-1,1),add(cntEven,1));
+    return rt = add(mul(dp(i-1,1),cntEven),dp(i-1,0));
+}
+
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
     cin>>n>>k;
+    cntEven=0;
+    for(int i=0;i<n;i++)
+            cntEven = add(cntEven,nCr(n,i));
+        _2pwn = 1;
+        for(int i=0;i<n;i++)
+            _2pwn = mul(_2pwn,2);
+        cout<<dp(k-1,1)<<endl;
     
 }
 void init() {

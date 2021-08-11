@@ -40,21 +40,21 @@ int nCr(int n, int r) {
 vector<vector<int>>dp;
 
 string getLCS(string s,string t,int len){
-            //cout<<s<<" "<<t<<" ";
    
+    // cout<<s<<" "<<t<<" "<<len;
     //cout<<len<<endl;
     string LCS;
-    int i=1,j=1;
+    int i=0,j=0;
     while(len>0){
 
-        if(s[i-1]==t[j-1])
+        if(s[i]==t[j])
         {
-            LCS.push_back(s[i-1]);
+            LCS += s[i];
             i++,j++,len--;
         }
         else
         {
-            if(dp[i][j+1]>dp[i+1][j])j++;
+            if(dp[s.size()-i][t.size() - j+1]>dp[s.size() - i+1][t.size() - j])j++;
             else i++;
 
         }
@@ -83,8 +83,17 @@ void solve(){
                 dp[i][j] = dp[i-1][j-1] + 1;
             else  dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
         }
+    cout<<"END:"<<endl;
+
+    for(i=0;i<=n;i++)
+        {
+            for(j=0;j<=m;j++)
+                cout<<dp[i][j]<<" | ";
+            cout<<endl;
+        }
+
+    cout<<getLCS(s1,s2,dp[n][m]);
     cout<<dp[n][m]<<endl;
-    getLCS("axyb","abyxb",dp[n][m]);
 
         
 }
