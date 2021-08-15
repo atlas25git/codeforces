@@ -21,6 +21,20 @@ inv[i] = MOD - (inv[MOD % i] * (MOD / i) % MOD);
 invfact[i] = (inv[i] * invfact[i - 1]) % MOD;
 }
 }
+const std::string WHITESPACE = " \n\r\t\f\v";
+std::string ltrim(const std::string &s)
+{
+size_t start = s.find_first_not_of(WHITESPACE);
+return (start == std::string::npos) ? "" : s.substr(start);
+}
+std::string rtrim(const std::string &s)
+{
+size_t end = s.find_last_not_of(WHITESPACE);
+return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+std::string trim(const std::string &s) {
+return rtrim(ltrim(s));
+}
 int add(int a, int b) {
 if ((a += b) >= MOD)
     a -= MOD;
@@ -38,19 +52,19 @@ int nCr(int n, int r) {
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cin>>n;
-        ans=INT_MAX;
-        vector<int>a(n);
-        for(int i=0;i<n;i++)
-            cin>>a[i];
-        if(n==1)
-        {   cout<<a[0]<<endl;
-            return;
-        }
-        ans=a[0];
-        for(auto x:a)ans=ans&x;
-
-        cout<<ans<<endl;
+        string s;
+        cin>>n>>s;
+        i=0;
+		s+='B';
+		for(;i<s.size();i++)
+			if(s[i]!='?')
+				break;
+		for(int j=i-1;j>=0;j--)
+			s[j]='R'-s[j+1]+'B';
+		for(;i<s.size();i++)
+			if(s[i]=='?')
+				s[i]='R'-s[i-1]+'B';
+		cout<<s.substr(0,n)<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
