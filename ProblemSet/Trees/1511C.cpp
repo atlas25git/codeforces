@@ -76,6 +76,8 @@ void solve(){
             int p = find(cards.begin(),cards.end(),x) - cards.begin();
             cout<<p+1<<" ";
             rotate(cards.begin(),cards.begin()+p,cards.begin()+p+1);
+            // for(auto x: cards)cout<<x<<" ";
+            // cout<<endl;
         }
 
 }
