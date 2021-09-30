@@ -66,22 +66,11 @@ vector<string> tokenize(string s, const char* del)
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cin>>n>>k;
-        vector<int>a(n),b(n);
-        for(i=0;i<n;i++)cin>>a[i];
-        for(i=0;i<n;i++)cin>>b[i];
-   
-        sort(a.begin(),a.end());
-        sort(b.begin(),b.end(),greater<int>());
+        cin>>n;
+        i = n+1;
         
-        for(i=0;i<k;i++)
-        {
-            if(a[i]<b[i])swap(a[i],b[i]);
-        }
-        
-        for(auto x: a)ans+=x;
+        ans = (i%mod*(2*n)%mod)%mod;
         cout<<ans<<endl;
-
 }
 void init() {
     ios_base:: sync_with_stdio(false);
