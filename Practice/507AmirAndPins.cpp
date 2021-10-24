@@ -66,30 +66,18 @@ vector<string> tokenize(string s, const char* del)
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        string s;
-        cin>>s;
-        n = s.size()-1;
-        for(i=0;i<n;i++)
-        {
-            if(s[i] < s[n] && ((s[i]-'0')%2 == 0))
-            {
-                swap(s[i],s[n]);
-                cout<<s;
-                return;
-            }
-        }
+    int x,y,xa,ya;
+    cin>>n>>x>>y>>xa>>ya;
 
-        for(i = n-1;i>=0;i--)
-        {
-            if((s[i] - '0')%2 == 0)
-            {
-                swap(s[i],s[n]);
-                cout<<s;
-                return;
-            }
-        }
-        cout<<"-1";
-        return;
+    double dist = 1LL*(x-xa)*(x-xa) + 1LL*(y-ya)*(y-ya);
+    dist = sqrt(dist);
+    k = n*2;
+    while(dist>0)
+    {
+        ans++;
+        dist -= k;
+    } 
+    cout<<ans;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -102,6 +90,9 @@ void init() {
 int32_t main(){
     init();
         {
+            // int t;
+            // cin>>t;
+            // while(t--)
             solve();
         }
     }

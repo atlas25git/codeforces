@@ -66,30 +66,34 @@ vector<string> tokenize(string s, const char* del)
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        string s;
-        cin>>s;
-        n = s.size()-1;
+        cin>>n;
+        vector<vector<int>> color(n,vector<int>(2,0));
+        vector<int> result(100001,0);
+
         for(i=0;i<n;i++)
         {
-            if(s[i] < s[n] && ((s[i]-'0')%2 == 0))
-            {
-                swap(s[i],s[n]);
-                cout<<s;
-                return;
-            }
+            cin>>color[i][0];
+            //the number of matches ith team would have to play
+            //in home kit
+            result[color[i][0]]++;
+            //the matches it'll have to play in home kit if other teams
+            //have the same color home kit
+            cin>>color[i][1];
         }
 
-        for(i = n-1;i>=0;i--)
+        
+
+        for(i=0;i<n;i++)
         {
-            if((s[i] - '0')%2 == 0)
-            {
-                swap(s[i],s[n]);
-                cout<<s;
-                return;
-            }
+            cout<<
+            //the matches played at home will be in home kit, plus the away matches
+            //where where the team's away kit is same as home kit of away team
+                n-1+result[color[i][1]]<<" "<<
+            //the number of total away games, n-1, such that the team's away kit color
+            //isn't the same
+            //result[i] contains no of matches for color[i][j] as home matches
+                n-1 - result[color[i][1]]<<endl;
         }
-        cout<<"-1";
-        return;
 }
 void init() {
     ios_base:: sync_with_stdio(false);
@@ -102,6 +106,9 @@ void init() {
 int32_t main(){
     init();
         {
+            // int t;
+            // cin>>t;
+            // while(t--)
             solve();
         }
     }
