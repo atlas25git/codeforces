@@ -66,23 +66,57 @@ vector<string> tokenize(string s, const char* del)
     return res;
 }
 void solve(){
-    int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cin>>n;
-        vector<int> a(n+1);
-        for(i=1;i<=n;i++)cin>>a[i];
+    int i,j,k,x,n,m,ans=0,cnt=0,sum=0;
+        cin>>x>>n;
+        // int total = n*(n+1)/2;
+        // int lt = n;
+        // if(x&1)
+        // {
+        //     while(lt%4 != 2)
+        //         lt--;
+        //     int no = lt/4;
+        //     no++;
+            
+        //     int a = no*(2+lt)/2;
 
-        //a[i]*a[j] == i+j
+        //     lt = n;
+        //     while(lt%4 != 3)
+        //         lt--;
+        //     no = lt/4;
+        //     no++;
+        //     int b = no*(3+lt)/2;
 
-       for(i=1;i<=n;i++)
-       {
-           for(j=i+1;j<=2*n/i;j++)
-           {
-               if((i<=n) && (j<=n) && a[i]+a[j] == (i*j))
-                    ans++;
-           }
-       }
+        //     ans = (total - a -b);
+            
+        // }
+        // else{
+        //     while(lt%4 != 1)
+        //         lt--;
+        //     int no = lt/4;
+        //     no++;
+            
+        //     int a = no*(4+lt)/2;
 
-       cout<<ans<<endl;
+        //     lt = n;
+        //     while(lt%4 != 0)
+        //         lt--;
+        //     no = lt/4;
+        //     no++;
+        //     int b = no*(5+lt)/2;
+
+        //     ans = (total -1 - a -b);
+        //     cout<<total<<" "<<a<<" "<<b<<endl;
+        // }
+        
+        int sT = n*(n+1)/2;
+        while(n%4 != 1)n--;
+        int no = n/4;
+        no++;
+        int total = no*(1+n)/2;
+        
+        if()
+
+        cout<<total<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);

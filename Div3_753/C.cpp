@@ -68,21 +68,45 @@ vector<string> tokenize(string s, const char* del)
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
         cin>>n;
-        vector<int> a(n+1);
-        for(i=1;i<=n;i++)cin>>a[i];
+        if(n==1)
+        {
+            cin>>k;
+            cout<<k<<endl;
+            return;
+        }
+        priority_queue<int,vector<int>,greater<int>> pq;
+        priority_queue<int,vector<int>,greater<int>> pq1;
+        
+        for(i=0;i<n;i++)cin>>k,pq.push(k);
+        int minE = pq.top();
 
-        //a[i]*a[j] == i+j
+        while(pq.size()!= 1)
+        {
+            if(pq.top()>0)
+            {   
+                while(pq.size()!=0)
+                {
+                    int top=pq.top();
+                    pq.pop();
+                    minE = max(minE,pq.top() - top);
+                }
+                break;
+            }
+            int top = pq.top();
+            pq.pop();
 
-       for(i=1;i<=n;i++)
-       {
-           for(j=i+1;j<=2*n/i;j++)
-           {
-               if((i<=n) && (j<=n) && a[i]+a[j] == (i*j))
-                    ans++;
-           }
-       }
+            while(pq.size())
+            {
+                pq1.push(pq.top()-top);
+                pq.pop();
+            }
+            swap(pq,pq1);
+            minE = max(minE,pq.top());
+            
+        }
 
-       cout<<ans<<endl;
+        cout<<minE<<endl;
+        
 }
 void init() {
     ios_base:: sync_with_stdio(false);

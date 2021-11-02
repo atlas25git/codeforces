@@ -67,22 +67,18 @@ vector<string> tokenize(string s, const char* del)
 }
 void solve(){
     int i,j,k,n,m,ans=0,cnt=0,sum=0;
-        cin>>n;
-        vector<int> a(n+1);
-        for(i=1;i<=n;i++)cin>>a[i];
-
-        //a[i]*a[j] == i+j
-
-       for(i=1;i<=n;i++)
-       {
-           for(j=i+1;j<=2*n/i;j++)
-           {
-               if((i<=n) && (j<=n) && a[i]+a[j] == (i*j))
-                    ans++;
-           }
-       }
-
-       cout<<ans<<endl;
+        string s;
+        cin>>s;
+        unordered_map<char,int> mp;
+        for(i=0;s[i];i++)
+            mp[s[i]] = i+1;
+        
+        string word;
+        cin>>word;
+        for(int i=1;word[i];i++)
+            ans+=abs(mp[word[i-1]]-mp[word[i]]);
+        
+        cout<<ans<<"\n";
 }
 void init() {
     ios_base:: sync_with_stdio(false);
