@@ -66,57 +66,26 @@ vector<string> tokenize(string s, const char* del)
     return res;
 }
 void solve(){
-    int i,j,k,x,n,m,ans=0,cnt=0,sum=0;
-        cin>>x>>n;
-        // int total = n*(n+1)/2;
-        // int lt = n;
-        // if(x&1)
-        // {
-        //     while(lt%4 != 2)
-        //         lt--;
-        //     int no = lt/4;
-        //     no++;
-            
-        //     int a = no*(2+lt)/2;
+    int i,j,k,n,m,ans=0,cnt=0,sum=0;
+        cin>>k>>n;
 
-        //     lt = n;
-        //     while(lt%4 != 3)
-        //         lt--;
-        //     no = lt/4;
-        //     no++;
-        //     int b = no*(3+lt)/2;
-
-        //     ans = (total - a -b);
-            
-        // }
-        // else{
-        //     while(lt%4 != 1)
-        //         lt--;
-        //     int no = lt/4;
-        //     no++;
-            
-        //     int a = no*(4+lt)/2;
-
-        //     lt = n;
-        //     while(lt%4 != 0)
-        //         lt--;
-        //     no = lt/4;
-        //     no++;
-        //     int b = no*(5+lt)/2;
-
-        //     ans = (total -1 - a -b);
-        //     cout<<total<<" "<<a<<" "<<b<<endl;
-        // }
-        
-        int sT = n*(n+1)/2;
-        while(n%4 != 1)n--;
-        int no = n/4;
-        no++;
-        int total = no*(1+n)/2;
-        
-        if()
-
-        cout<<total<<endl;
+        int d = 0;
+        int x = n%4;
+        if(x==1){
+            d = -n;
+        }
+        else if(x==2)
+        {
+            d = 1;
+        }
+        else if(x==3)
+        {
+            d = n +1;
+        }
+        else
+            d = 0;
+        ans = (k&1)?(k-d):(k+d);
+        cout<<ans<<endl;
 }
 void init() {
     ios_base:: sync_with_stdio(false);

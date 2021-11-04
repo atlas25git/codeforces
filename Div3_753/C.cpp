@@ -81,28 +81,13 @@ void solve(){
         int minE = pq.top();
 
         while(pq.size()!= 1)
-        {
-            if(pq.top()>0)
-            {   
+        {  
                 while(pq.size()!=0)
                 {
                     int top=pq.top();
                     pq.pop();
                     minE = max(minE,pq.top() - top);
-                }
-                break;
-            }
-            int top = pq.top();
-            pq.pop();
-
-            while(pq.size())
-            {
-                pq1.push(pq.top()-top);
-                pq.pop();
-            }
-            swap(pq,pq1);
-            minE = max(minE,pq.top());
-            
+                }        
         }
 
         cout<<minE<<endl;
